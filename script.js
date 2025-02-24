@@ -27,6 +27,9 @@ document.getElementById('image-upload').addEventListener('change', function (eve
                     img.style.transform = 'translateX(-50%)';
                 }
             };
+
+            // Ajouter un indicateur de chargement
+            wrapper.innerHTML += '<div class="loading-overlay"><div class="spinner"></div></div>';
         };
         reader.readAsDataURL(file);
     }
@@ -36,6 +39,12 @@ document.getElementById('image-upload').addEventListener('change', function (eve
 document.querySelector('.user-name-input').addEventListener('input', function (e) {
     const nameElement = document.querySelector('.user-name');
     nameElement.textContent = e.target.value || 'Votre nom';
+
+    const value = e.target.value;
+    if (value.length > 50) {
+        e.target.value = value.slice(0, 50);
+        showNotification('Le nom ne peut pas dépasser 50 caractères');
+    }
 });
 
 // Mise à jour du pays en temps réel
@@ -56,16 +65,27 @@ document.getElementById('download-btn').addEventListener('click', function () {
     const originalFrameStyle = frame.getAttribute('style') || '';
     const originalContainerStyle = imageContainer.getAttribute('style') || '';
 
-    // Appliquer les dimensions d'export
+    // Appliquer les dimensions d'export optimisées
     frame.style.width = '940px';
-    frame.style.height = '788px';
-    imageContainer.style.height = '450px';
+    frame.style.height = '788px';  // Retour à la hauteur originale
+    imageContainer.style.height = '500px';  // Augmentation de la hauteur du conteneur d'image
 
     html2canvas(frame, {
         scale: 2,
         useCORS: true,
         allowTaint: true,
-        backgroundColor: null
+        backgroundColor: null,
+        // Amélioration de la qualité du rendu
+        logging: false,
+        imageTimeout: 0,
+        onclone: function (clonedDoc) {
+            // S'assurer que les styles sont correctement appliqués dans le clone
+            const clonedYouthAgenda = clonedDoc.querySelector('.youth-agenda');
+            if (clonedYouthAgenda) {
+                clonedYouthAgenda.style.background = 'none';
+                clonedYouthAgenda.style.color = '#b87333';
+            }
+        }
     }).then((canvas) => {
         const link = document.createElement('a');
         link.download = 'africa-japan-youth-drive.png';
@@ -81,4 +101,55 @@ document.getElementById('download-btn').addEventListener('click', function () {
         this.style.opacity = '1';
     });
 });
+
+// Fonction de notification
+function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.textContent = message;
+    document.body.appendChild(notification);
+
+    setTimeout(() => notification.remove(), 3000);
+}
+
+// Optimisation du chargement des images
+function optimizeImage(file) {
+    return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const img = new Image();
+            img.onload = function () {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+
+                // Définir une taille maximale
+                const MAX_WIDTH = 1200;
+                const MAX_HEIGHT = 1200;
+
+                let width = img.width;
+                let height = img.height;
+
+                if (width > height) {
+                    if (width > MAX_WIDTH) {
+                        height *= MAX_WIDTH / width;
+                        width = MAX_WIDTH;
+                    }
+                } else {
+                    if (height > MAX_HEIGHT) {
+                        width *= MAX_HEIGHT / height;
+                        height = MAX_HEIGHT;
+                    }
+                }
+
+                canvas.width = width;
+                canvas.height = height;
+                ctx.drawImage(img, 0, 0, width, height);
+
+                resolve(canvas.toDataURL('image/jpeg', 0.85));
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    });
+}
 

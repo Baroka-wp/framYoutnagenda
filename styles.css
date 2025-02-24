@@ -48,12 +48,16 @@ body::after {
     background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23b87333' fill-opacity='0.05'%3E%3Ccircle cx='10' cy='10' r='2'/%3E%3Ccircle cx='90' cy='10' r='2'/%3E%3Ccircle cx='90' cy='90' r='2'/%3E%3Ccircle cx='10' cy='90' r='2'/%3E%3Ccircle cx='50' cy='50' r='2'/%3E%3Cpath d='M10 10L50 50M50 50L90 10M50 50L90 90M10 90L50 50' stroke='%23b87333' stroke-width='0.5' stroke-opacity='0.05'/%3E%3C/g%3E%3C/svg%3E");
     background-size: 50px 50px;
     border-radius: 25px;
-    padding: 30px;
+    padding: 20px;
     position: relative;
     margin: 0 auto;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
+    background: rgba(255, 249, 230, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .frame::before {
@@ -77,9 +81,27 @@ body::after {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     position: relative;
     z-index: 1;
+    padding-bottom: 15px;
+}
+
+.header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent 0%,
+        rgba(184, 115, 51, 0.3) 20%,
+        rgba(184, 115, 51, 0.5) 50%,
+        rgba(184, 115, 51, 0.3) 80%,
+        transparent 100%
+    );
 }
 
 .header h1 {
@@ -113,23 +135,23 @@ body::after {
 
 .image-container {
     display: flex;
-    height: 50vh;
-    min-height: 350px;
+    height: 55vh;
+    min-height: 400px;
     max-height: 500px;
     position: relative;
     z-index: 1;
-    padding: 0;
-   
+    padding: 0 10px;
+    gap: 8px;
 }
 
 .image-wrapper {
-    flex: 1;
+    flex: 1.2;
     position: relative;
     border-radius: 25px;
     overflow: hidden;
-    padding: 15px;
+    padding: 3px;
     display: flex;
-    align-items: center;
+    align-items: top;
 }
 
 #user-image {
@@ -144,11 +166,12 @@ body::after {
 }
 
 .message-wrapper {
-    flex: 1;
+    flex: 0.8;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-left: 30px;
+    padding: 10px 15px;
+    position: relative;
 }
 
 .message-content {
@@ -169,9 +192,7 @@ body::after {
     font-size: 3rem;
     font-weight: 700;
     margin: 0;
-    background: linear-gradient(135deg, #b87333, #D4AF37);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #b87333;
     line-height: 1.2;
     margin-bottom: 15px;
 }
@@ -223,6 +244,7 @@ body::after {
     font-weight: 600;
     color: #333;
     margin-bottom: 5px;
+    width: 100%;
 }
 
 .user-country {
@@ -275,14 +297,14 @@ body::after {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 25px 30px;
+    padding: 15px 20px;
     margin-left: -30px;
     margin-right: -30px;
     margin-bottom: -30px;
     background-color: white;
     border-radius: 0 0 25px 25px;
     border-top: 2px solid #b87333;
-    gap: 30px;
+    gap: 20px;
     position: relative;
     z-index: 1;
 }
@@ -304,6 +326,11 @@ body::after {
     gap: 15px;
     margin: 30px 0;
     justify-content: center;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(8px);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .user-name-input {
@@ -329,19 +356,19 @@ body::after {
     align-items: center;
     gap: 8px;
     padding: 12px 24px;
-    background: #D4AF37;
+    background: linear-gradient(135deg, #D4AF37, #b87333);
     color: white;
     border: none;
     border-radius: 8px;
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .upload-btn:hover, #download-btn:hover {
-    background: #c4a032;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
 }
 
 .upload-btn i, #download-btn i {
@@ -430,13 +457,12 @@ body::after {
     }
     
     .image-container {
-        flex-direction: column;
         height: auto;
-        padding: 20px;
+        flex-direction: column;
     }
     
     .image-wrapper {
-        height: 300px;
+        height: 400px;
     }
     
     .footer {
@@ -467,15 +493,36 @@ body::after {
     }
 
     #user-image {
+        margin-left: 21%;
         width: 100%;
         height: 100%;
     }
 
     .message-wrapper {
-        padding: 20px 0 0 0;
+        padding: 15px 0 0 0;
     }
 
     .social-tags {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .header h1 {
+        font-size: 20px;
+    }
+    
+    .youth-agenda {
+        font-size: 24px;
+    }
+    
+    .footer {
         flex-wrap: wrap;
         justify-content: center;
     }
@@ -555,14 +602,40 @@ body::after {
 }
 
 .support-text {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 500;
     color: #666;
 }
 
 .africa-text {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 600;
     color: #4CAF50;
     margin-top: 5px;
+}
+
+/* Animation de chargement */
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #D4AF37;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.youth-agenda {
+    font-size: 2.5rem;
 }
