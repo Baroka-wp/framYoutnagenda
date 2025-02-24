@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Africa-Japan Youth Drive</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="frame-container">
+        <div class="frame">
+            <div class="header">
+                <img src="./assets/img5.jpeg" alt="Logo ADNI" class="logo-left">
+                <h1>Africa-Japan Youth  2nd Drive:<br>Co-creating the Future We Want</h1>
+                <img src="./assets/img4.jpeg" alt="Logo Africa Asia Youth Nest" class="logo-right">
+            </div>
+            <div class="image-container">
+                <div class="image-wrapper">
+                    <img src="mock-landscape.png" alt="" id="user-image">
+                    <div class="user-info">
+                        <div class="user-name">Votre nom</div>
+                        <div class="user-country">Votre pays</div>
+                    </div>
+                </div>
+                <div class="message-wrapper">
+                    <div class="message-content">
+                        <div class="support-text">I commit to :</div>
+                        <div class="youth-agenda">YOUTH AGENDA 2055 : </div>
+                        <div class="africa-text">The future we want</div>
+                    </div>
+                    <div class="social-section">
+                        <div class="hashtags">
+                            #AfricaMyHome #AfricaMyFuture
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="footer">
+                <img src="./assets/img4.jpeg" alt="African Union">
+                <img src="./assets/imag9.png" alt="UNDP">
+                <img src="./assets/img8.jpeg" alt="UN Volunteers">
+                <img src="./assets/img6.jpeg" alt="JICA">
+                <img src="./assets/img1.png" alt="NEPAD">
+                <img src="./assets/logo_ticad.jpg" alt="NEPAD">
+            </div>
+        </div>
+    </div>
+    <div class="controls">
+        <input type="text" class="user-name-input" placeholder="Entrez votre nom">
+        <select class="country-select" id="country-select">
+            <option value="">Sélectionnez votre pays</option>
+            <option value="Benin">Bénin</option>
+            <option value="Burkina Faso">Burkina Faso</option>
+            <option value="Cameroon">Cameroun</option>
+            <option value="Chad">Tchad</option>
+            <option value="Congo">Congo</option>
+            <option value="DRC">RD Congo</option>
+            <option value="Ethiopia">Éthiopie</option>
+            <option value="Ghana">Ghana</option>
+            <option value="Kenya">Kenya</option>
+            <option value="Mali">Mali</option>
+            <option value="Nigeria">Nigeria</option>
+            <option value="Rwanda">Rwanda</option>
+            <option value="Senegal">Sénégal</option>
+            <option value="Tanzania">Tanzanie</option>
+            <option value="Uganda">Ouganda</option>
+        </select>
+        <input type="file" id="image-upload" accept="image/*">
+        <label for="image-upload" class="upload-btn">
+            <i class="fas fa-image"></i>
+            Choisir une image
+        </label>
+        <button id="download-btn">
+            <i class="fas fa-download"></i>
+            Télécharger
+        </button>
+    </div>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
